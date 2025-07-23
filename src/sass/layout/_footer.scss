@@ -40,18 +40,28 @@
     display: inline-flex;
     gap: 1.5rem;
   }
-  
+
   &__link {
-    &:link, &:visited {
+    &:link,
+    &:visited {
       color: vars.$color-grey-light-1;
       background-color: vars.$color-grey-very-dark;
       text-transform: uppercase;
       display: inline-block;
     }
 
-    &:hover, &:active {
+    &:hover,
+    &:active {
       color: vars.$color-primary-light;
       box-shadow: 0 1rem 2rem vars.$color-black-very-light;
+    }
+
+    &--paragraph {
+      &:link,
+      &:visited {
+        text-transform: none;
+        text-decoration: underline;
+      }
     }
   }
 
