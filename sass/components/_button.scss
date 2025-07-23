@@ -1,0 +1,81 @@
+@use "../abstract/variables" as vars;
+@use "../abstract/mixins";
+@use "../base/animations";
+
+.btn {
+  @include mixins.button-press-effect;
+
+  &,
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    padding: 1.5rem 3.5rem;
+    display: inline-block;
+    border-radius: 16px;
+    border: none;
+    position: relative;
+    font-size: vars.$copy-font-size;
+    cursor: pointer;
+  }
+
+  &:hover::after {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+
+  &::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 16px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: .4;
+    transition: all .5s;
+  }
+
+  &--white {
+    background-color: vars.$color-white;
+    color: vars.$color-grey-dark;
+
+    &::after {
+      background-color: vars.$color-white;
+    }
+  }
+
+  &--primary {
+    background-color: vars.$color-primary-medium;
+    color: vars.$color-grey-light-1;
+
+    &::after {
+      background-color: vars.$color-primary-medium;
+    }
+  }
+
+  &--animated {
+    animation: moveInBottom 0.5s ease-out;
+    animation-delay: 0.5s;
+    animation-fill-mode: backwards;
+  }
+}
+
+.btn-text {
+  @include mixins.button-press-effect;
+
+  &:link,
+  &:visited {
+    display: inline-block;
+    font-size: vars.$copy-font-size;
+    color: vars.$color-primary-medium;
+    border-bottom: 1px solid vars.$color-primary-medium;
+    padding-bottom: 3px;
+    transition: transform 0.1s ease-out;
+  }
+
+  &:hover {
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,82 @@
+@use "../abstract/variables" as vars;
+@use "../abstract/mixins";
+
+.story {
+  width: 60%;
+  margin: 0 auto;
+  box-shadow: 0 2rem 4rem vars.$color-black-very-light;
+  background-color: rgba(vars.$color-white, .8);
+  border-radius: 6px;
+  padding: 5rem 5rem 5rem 8rem;
+  transform: skewX(-12deg);
+
+  @include mixins.responsive-tablet {
+    transform: none;
+    width: 90%;
+  }
+
+  @include mixins.responsive-phone {
+    padding: 4rem 3rem 3rem 6rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 8rem;
+  }
+
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+    float: left;
+    shape-outside: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+    transform: translateX(-3rem) skewX(12deg);
+    position: relative;
+
+    @include mixins.responsive-tablet {
+      transform: translateX(-3rem);
+    }
+
+    @include mixins.responsive-phone {
+      width: 10rem;
+      height: 10rem;
+      transform: translateX(-1rem);
+    }
+    
+  }
+
+  &__image {
+    height: 100%;
+    transition: all 0.4s ease;
+  }
+
+  &__text {
+    transform: skewX(12deg);
+
+    @include mixins.responsive-tablet {
+      transform: none;
+    }
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    opacity: 0;
+    color: vars.$color-white;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    text-align: center;
+    transition: all 0.4s ease;
+  }
+
+  &:hover &__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover &__image {
+    transform: scale(1.2);
+    filter: blur(2px) brightness(85%);
+  }
+}

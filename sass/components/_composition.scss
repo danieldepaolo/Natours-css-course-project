@@ -1,0 +1,59 @@
+@use "../abstract/variables" as vars;
+@use "../abstract/mixins";
+
+.composition {
+  position: relative;
+  width: 100%;
+
+  &__photo {
+    width: 55%;
+    box-shadow: 0 1rem 3rem vars.$color-black-very-light;
+    border-radius: 2px;
+    position: absolute;
+    transition: transform 0.1s;
+    z-index: 1;
+    outline-offset: 1rem;
+
+    @include mixins.responsive-tablet {
+      position: relative;
+      outline-offset: .6rem;
+      width: 32%;
+    }
+
+    &--p1 {
+      top: 0;
+      left: 0;
+    }
+
+    &--p2 {
+      top: 8rem;
+      left: 20%;
+
+      @include mixins.responsive-tablet {
+        top: 0;
+        left: 0;
+      }
+    }
+
+    &--p3 {
+      top: 4rem;
+      left: 40%;
+
+      @include mixins.responsive-tablet {
+        top: 0;
+        left: 0;
+      }
+    }
+
+    &:hover {
+      outline: .8rem solid vars.$color-primary-medium;
+      transform: scale(1.05) translateY(-.5rem);
+      box-shadow: 0 1.5rem 4rem vars.$color-black-very-light;
+      z-index: 2;
+    }
+  }
+
+  &:hover &__photo:not(:hover) {
+    transform: scale(0.95);
+  }
+}

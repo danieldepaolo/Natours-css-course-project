@@ -1,0 +1,101 @@
+@use "../abstract/variables" as vars;
+@use "../abstract/mixins";
+
+.navigation {
+  &__button {
+    @include mixins.circle(7rem);
+
+    background-color: rgba(vars.$color-white, .6);
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+    border: none;
+    z-index: 1002;
+    cursor: pointer;
+
+    img {
+      @include mixins.abs-center;
+      width: 50%;
+    }
+
+    @include mixins.responsive-tablet {
+      top: 3rem;
+      right: 3rem;
+    }
+  }
+
+  &__background {
+    @include mixins.circle(6rem);
+
+    position: fixed;
+    top: 9rem;
+    right: 9rem;
+    background-image: radial-gradient(
+      vars.$color-primary-light,
+      vars.$color-primary-dark
+    );
+    z-index: 1000;
+    transition: all .5s ease;
+    opacity: 0;
+
+    &--show {
+      opacity: 1;
+      transform: scale(60);
+    }
+
+    @include mixins.responsive-tablet {
+      top: 6rem;
+      right: 6rem;
+    }
+  }
+
+  &__menu {
+    pointer-events: none;
+    user-select: none;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+    opacity: 0;
+    transition: all .5s ease;
+
+    &--show {
+      pointer-events: initial;
+      user-select: initial;
+      opacity: 1;
+    }
+  }
+
+  &__list {
+    @include mixins.abs-center;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  &__link {
+    &:link, &:visited {
+      text-transform: uppercase;
+      color: vars.$color-grey-light-1;
+      letter-spacing: 3px;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      background: linear-gradient(120deg, transparent 0%, transparent 50%, vars.$color-white 50%);
+      background-size: 220%;
+      transition: all .4s;
+      transform: translateX(0);
+      display: block;
+    }
+    
+    &:hover, &:active {
+      background-position: 100%;
+      color: vars.$color-grey-dark;
+      transform: translateX(1rem);
+    }
+  }
+}

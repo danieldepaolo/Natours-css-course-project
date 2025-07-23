@@ -1,0 +1,64 @@
+@use "../abstract/variables" as vars;
+@use "../abstract/mixins";
+
+.grid-row {
+  max-width: vars.$grid-width;
+  margin: 0 auto;
+  padding: 0 3rem;
+
+  @include mixins.responsive-tablet {
+    padding: 0 2.2rem;
+    max-width: 70rem;
+  }
+
+  @include mixins.responsive-phone {
+    padding: 0 1.5rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: vars.$gutter-vertical;
+  }
+
+  [class^="col-"] {
+    float: left;
+
+    &:not(:last-child) {
+      margin-right: vars.$gutter-horizontal;
+
+      @include mixins.responsive-tablet {
+        margin-right: 0;
+        margin-bottom: vars.$gutter-vertical-small;
+      }
+    }
+
+    @include mixins.responsive-tablet {
+      width: 100% !important;
+    }
+  }
+
+  .col-1-of-2 {
+    width: vars.$col-1-2-width;
+  }
+
+  .col-1-of-3 {
+    width: vars.$col-1-3-width;
+  }
+
+  .col-2-of-3 {
+    width: calc(vars.$col-1-3-width * 2 + vars.$gutter-horizontal);
+  }
+
+  .col-1-of-4 {
+    width: vars.$col-1-4-width;
+  }
+
+  .col-2-of-4 {
+    width: calc(vars.$col-1-4-width * 2 + vars.$gutter-horizontal);
+  }
+
+  .col-3-of-4 {
+    width: calc(vars.$col-1-4-width * 3 + (2 * vars.$gutter-horizontal));
+  }
+
+  @include mixins.clearfix;
+}

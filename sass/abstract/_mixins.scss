@@ -1,0 +1,110 @@
+@use "variables" as vars;
+
+@mixin abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin circle($diameter) {
+  height: $diameter;
+  width: $diameter;
+  border-radius: 50%;
+}
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin button-press-effect {
+  transition: transform .2s ease-out;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px vars.$color-black-very-light;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px vars.$color-black-very-light;
+  }
+}
+
+@mixin text-gradient {
+  display: inline-block;
+  color: vars.$color-primary-dark;
+  
+  @supports(background-clip: text) {
+    background-clip: text;
+    @include bg-image-gradient('primary', "../img/hero-small_800x479.jpg", 0.8);
+    color: transparent;
+  }
+}
+
+@mixin bg-gradient($type, $alpha: 1) {
+  $start-color: rgba(vars.$color-primary-light, $alpha);
+  $end-color: rgba(vars.$color-primary-dark, $alpha);
+
+  @if $type == "secondary" {
+    $start-color: rgba(vars.$color-secondary-light, $alpha);
+    $end-color: rgba(vars.$color-secondary-dark, $alpha);
+  } @else if $type == "tertiary" {
+    $start-color: rgba(vars.$color-tertiary-light, $alpha);
+    $end-color: rgba(vars.$color-tertiary-dark, $alpha);
+  }
+
+  background: linear-gradient(to right bottom, $start-color, $end-color);
+}
+
+@mixin bg-image-gradient($type, $imgUrl, $alpha: 1) {
+  $start-color: rgba(vars.$color-primary-light, $alpha);
+  $end-color: rgba(vars.$color-primary-dark, $alpha);
+
+  @if $type == "secondary" {
+    $start-color: rgba(vars.$color-secondary-light, $alpha);
+    $end-color: rgba(vars.$color-secondary-dark, $alpha);
+  } @else if $type == "tertiary" {
+    $start-color: rgba(vars.$color-tertiary-light, $alpha);
+    $end-color: rgba(vars.$color-tertiary-dark, $alpha);
+  }
+
+  background-image: linear-gradient(to right bottom, $start-color, $end-color),
+    url($imgUrl);
+}
+
+// Media query manager
+/*
+  0 - 600px: Phone
+  600 - 950px: Tablet
+  [950 - 1800] Normal styles apply
+  1800+: Big desktop
+*/
+
+@mixin responsive-phone {
+  @media only screen and (max-width: vars.$breakpoint-phone) {
+    @content
+  }
+}
+
+@mixin responsive-tablet {
+  @media only screen and (max-width: vars.$breakpoint-tablet) {
+    @content
+  }
+}
+
+@mixin responsive-desktop {
+  @media only screen and (min-width: vars.$breakpoint-tablet) {
+    @content
+  }
+}
+
+@mixin responsive-big-desktop {
+  @media only screen and (min-width: vars.$breakpoint-desktop) {
+    @content
+  }
+}

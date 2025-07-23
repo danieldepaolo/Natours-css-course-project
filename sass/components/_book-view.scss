@@ -1,0 +1,66 @@
+@use "../abstract/variables" as vars;
+@use "../abstract/mixins";
+
+.book-view {
+  display: flex;
+
+  .btn {
+    margin: 0 auto;
+  }
+
+  @include mixins.responsive-tablet {
+    flex-direction: column;
+  }
+ 
+  &__left {
+    flex: 1 1 34%;
+
+    @include mixins.responsive-tablet {
+      display: flex;
+    }
+
+    @include mixins.responsive-phone {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__right {
+    flex: 1 1 66%;
+    padding: 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    @include mixins.responsive-phone {
+      padding: 2rem 2.5rem;
+    }
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+
+    @include mixins.responsive-tablet {
+      width: 50%;
+    }
+
+    @include mixins.responsive-phone {
+      width: 100%;
+    }
+  }
+
+  &__text {
+    font-size: 1.4rem;
+
+    column-count: 2;
+    column-gap: 4rem;
+    column-rule: 1px solid vars.$color-black-very-light;
+    hyphens: auto;
+
+    @include mixins.responsive-phone {
+      column-count: initial;
+    }
+  }
+}

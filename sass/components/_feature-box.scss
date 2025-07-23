@@ -1,0 +1,34 @@
+@use "../abstract/variables" as vars;
+@use "../abstract/mixins";
+
+.feature-box {
+  background-color: rgba(vars.$color-white, .8);
+  font-size: 1.5rem;
+  padding: 2.5rem;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem vars.$color-black-very-light;
+  transition: transform 0.2s;
+  height: 35rem;
+
+  @include mixins.responsive-tablet {
+    padding: 2rem;
+    height: 30rem;
+  }
+
+  @include mixins.responsive-phone {
+    max-width: 70%;
+    margin: 0 auto;
+  }
+
+  &__icon {
+    font-size: 6rem;
+    margin-bottom: .5rem;
+
+    @include mixins.text-gradient;
+  }
+
+  &:hover {
+    transform: translateY(-1rem) scale(1.02);
+  }
+}

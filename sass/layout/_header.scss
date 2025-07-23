@@ -1,0 +1,52 @@
+@use "../abstract/variables" as vars;
+@use "../abstract/mixins";
+
+.header {
+  position: relative;
+  height: 95vh;
+  background-size: cover;
+  background-position: top;
+  clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100%);
+
+  // Phones
+  @media only screen and (max-width: vars.$breakpoint-phone) {
+    @include mixins.bg-image-gradient(
+      "primary",
+      "../img/hero-small_800x479.jpg",
+      0.8
+    );
+  }
+
+  // Tablet or low-res desktop
+  @media only screen and (min-width: calc(vars.$breakpoint-phone + .0625em)) and (max-width: 1023px),
+    (max-resolution: 191dpi) and (min-width: 1024px) {
+    @include mixins.bg-image-gradient("primary", "../img/hero-small.jpg", 0.8);
+  }
+
+  // High-res desktop or large desktop
+  @media only screen and (min-resolution: 192dpi) and (min-width: 1024px),
+    (max-resolution: 191dpi) and (min-width: vars.$breakpoint-desktop) {
+    @include mixins.bg-image-gradient("primary", "../img/hero.jpg", 0.8);
+  }
+
+  @include mixins.responsive-phone {
+    clip-path: polygon(0 0, 100% 0, 100% 87vh, 0 100%);
+  }
+
+  &__text-container {
+    @include mixins.abs-center;
+
+    top: 40%;
+    width: 100%;
+  }
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    height: 3.5rem;
+  }
+}
