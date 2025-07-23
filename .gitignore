@@ -1,3 +1,4 @@
-/src/css/*
+/src/css/generated/
+/src/css/style.*
 /node_modules/
 /dist/
