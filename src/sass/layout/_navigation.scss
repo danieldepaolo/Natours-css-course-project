@@ -40,7 +40,7 @@
 
     &--show {
       opacity: 1;
-      transform: scale(60);
+      transform: scale(100);
     }
 
     @include mixins.responsive-tablet {
